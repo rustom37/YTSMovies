@@ -38,7 +38,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMovieTableViewCell", for: indexPath) as! CustomMovieTableViewCell
         
         cell.movieTitle.text = moviesArray[indexPath.row].title
-        cell.moviePoster.image = UIImage(data: try! Data(contentsOf: URL(string: moviesArray[indexPath.row].poster)!))
+        
+        guard let posterURL = URL(string: moviesArray[indexPath.row].poster) else {
+            fatalError("Couldn't receive the correct URL.")
+        }
+        
+        do {
+            let posterData = try Data(contentsOf: posterURL)
+            cell.moviePoster.image = UIImage(data: posterData)
+        } catch {
+            print("Error retrieving the contents of URL, \(error)")
+        }
+        
+        
+            
+//        cell.moviePoster.image = UIImage(data: try! Data(contentsOf: URL(string: moviesArray[indexPath.row].poster)!))
         
         return cell
     }
@@ -73,9 +87,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     self.moviesArray.append(Movie(title: movieTitle, poster: movieURL))
                 }
 
-//                for object in moviesJSON {
-//                    self.moviesArray.append(Movie(title: moviesJSON["data"]["movies"][]["title"].stringValue, poster: moviesJSON["data"]["movies"][index]["small_cover_image"].stringValue))
-//                }
                 self.configureTableView()
                 self.moviesTableView.reloadData()
             } else {
