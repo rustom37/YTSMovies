@@ -14,6 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let moviesURL = "https://yts.am/api/v2/list_movies.json"
     var moviesArray : [Movie] = [Movie]()
+    var imageArray : [UIImage] = [UIImage]()
     
     @IBOutlet weak var moviesTableView: UITableView!
     
@@ -40,16 +41,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.movieTitle.text = moviesArray[indexPath.row].title
         cell.movieTitle.adjustsFontSizeToFitWidth = true
         
-        guard let posterURL = URL(string: moviesArray[indexPath.row].poster) else {
-            fatalError("Couldn't receive the correct URL.")
-        }
+//        guard let posterURL = URL(string: moviesArray[indexPath.row].poster) else {
+//            fatalError("Couldn't receive the correct URL.")
+//        }
         
-        do {
-            let posterData = try Data(contentsOf: posterURL)
-            cell.moviePoster.image = UIImage(data: posterData)
-        } catch {
-            print("Error retrieving the contents of URL, \(error)")
-        }
+//        do {
+//            let posterData = try Data(contentsOf: posterURL)
+//            cell.moviePoster.image = UIImage(data: posterData)
+//        } catch {
+//            print("Error retrieving the contents of URL, \(error)")
+//        }
+        //changeURLIntoImage()
+        cell.moviePoster.image = imageArray[indexPath.row]
         
         return cell
     }
@@ -80,8 +83,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 for movie in dataArray.arrayValue {
                     let movieTitle = movie["title"].stringValue
-                    let movieURL = movie["small_cover_image"].stringValue
-                    self.moviesArray.append(Movie(title: movieTitle, poster: movieURL))
+//                    let movieURL = movie["small_cover_image"].stringValue
+//                    self.moviesArray.append(Movie(title: movieTitle, poster: movieURL))
+                    guard let posterURL = URL(string: movie["small_cover_image"].stringValue) else {
+                        fatalError("Couldn't receive the correct URL.")
+                    }
+                    
+                    do {
+                        let posterData = try Data(contentsOf: posterURL)
+                        
+                        guard let posterImage = UIImage(data: posterData) else {
+                            fatalError("Couldn't convert to Image.")
+                        }
+                        self.imageArray.append(posterImage)
+                    } catch {
+                        print("Error retrieving the contents of URL, \(error)")
+                    }
+                    self.moviesArray.append(Movie(title: movieTitle))
                 }
 
                 self.configureTableView()

@@ -11,8 +11,16 @@ class Movie {
     var title : String = ""
     var poster : String = ""
     
-    init(title: String, poster: String) {
+//    init(title: String, poster: String) {
+//        self.title = title
+//        self.poster = poster
+//    }
+    
+    init(title: String) {
         self.title = title
+    }
+    
+    func setPoster(poster: String) {
         self.poster = poster
     }
     
