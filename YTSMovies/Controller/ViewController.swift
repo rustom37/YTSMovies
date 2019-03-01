@@ -50,10 +50,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             print("Error retrieving the contents of URL, \(error)")
         }
         
-        
-            
-//        cell.moviePoster.image = UIImage(data: try! Data(contentsOf: URL(string: moviesArray[indexPath.row].poster)!))
-        
         return cell
     }
     
