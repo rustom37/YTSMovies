@@ -7,15 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		846A7C85AE1C135AD571FEB6 /* Pods_YTSMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C579564247C51F10671214DA /* Pods_YTSMovies.framework */; };
 		AA32145F22258038005B0EA4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32145E22258038005B0EA4 /* AppDelegate.swift */; };
 		AA32146122258038005B0EA4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32146022258038005B0EA4 /* ViewController.swift */; };
 		AA32146422258038005B0EA4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA32146222258038005B0EA4 /* Main.storyboard */; };
 		AA32146722258038005B0EA4 /* YTSMovies.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = AA32146522258038005B0EA4 /* YTSMovies.xcdatamodeld */; };
 		AA32146922258038005B0EA4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA32146822258038005B0EA4 /* Assets.xcassets */; };
 		AA32146C22258038005B0EA4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA32146A22258038005B0EA4 /* LaunchScreen.storyboard */; };
+		AA32148022258C25005B0EA4 /* CustomMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32147E22258C25005B0EA4 /* CustomMovieTableViewCell.swift */; };
+		AA32148122258C25005B0EA4 /* CustomMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA32147F22258C25005B0EA4 /* CustomMovieTableViewCell.xib */; };
+		AA32148322259435005B0EA4 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32148222259435005B0EA4 /* Movie.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4270CB7CB10857C5BBF6FE7C /* Pods-YTSMovies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTSMovies.release.xcconfig"; path = "Pods/Target Support Files/Pods-YTSMovies/Pods-YTSMovies.release.xcconfig"; sourceTree = "<group>"; };
 		AA32145B22258038005B0EA4 /* YTSMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = YTSMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA32145E22258038005B0EA4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA32146022258038005B0EA4 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +29,11 @@
 		AA32146822258038005B0EA4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AA32146B22258038005B0EA4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AA32146D22258038005B0EA4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		AA32147E22258C25005B0EA4 /* CustomMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMovieTableViewCell.swift; sourceTree = "<group>"; };
+		AA32147F22258C25005B0EA4 /* CustomMovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMovieTableViewCell.xib; sourceTree = "<group>"; };
+		AA32148222259435005B0EA4 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		C579564247C51F10671214DA /* Pods_YTSMovies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YTSMovies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E29B1662261BFF61CADA868C /* Pods-YTSMovies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTSMovies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YTSMovies/Pods-YTSMovies.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +41,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				846A7C85AE1C135AD571FEB6 /* Pods_YTSMovies.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6B2B65C14AE4C8D3CB173611 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E29B1662261BFF61CADA868C /* Pods-YTSMovies.debug.xcconfig */,
+				4270CB7CB10857C5BBF6FE7C /* Pods-YTSMovies.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		AA32145222258037005B0EA4 = {
 			isa = PBXGroup;
 			children = (
 				AA32145D22258038005B0EA4 /* YTSMovies */,
 				AA32145C22258038005B0EA4 /* Products */,
+				6B2B65C14AE4C8D3CB173611 /* Pods */,
+				CBE5602E4B50789AADB81B80 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,6 +78,7 @@
 		AA32145D22258038005B0EA4 /* YTSMovies */ = {
 			isa = PBXGroup;
 			children = (
+				AA32148222259435005B0EA4 /* Movie.swift */,
 				AA32145E22258038005B0EA4 /* AppDelegate.swift */,
 				AA32146022258038005B0EA4 /* ViewController.swift */,
 				AA32146222258038005B0EA4 /* Main.storyboard */,
@@ -63,8 +86,26 @@
 				AA32146A22258038005B0EA4 /* LaunchScreen.storyboard */,
 				AA32146D22258038005B0EA4 /* Info.plist */,
 				AA32146522258038005B0EA4 /* YTSMovies.xcdatamodeld */,
+				AA321475222582D6005B0EA4 /* Custom Cell */,
 			);
 			path = YTSMovies;
+			sourceTree = "<group>";
+		};
+		AA321475222582D6005B0EA4 /* Custom Cell */ = {
+			isa = PBXGroup;
+			children = (
+				AA32147E22258C25005B0EA4 /* CustomMovieTableViewCell.swift */,
+				AA32147F22258C25005B0EA4 /* CustomMovieTableViewCell.xib */,
+			);
+			path = "Custom Cell";
+			sourceTree = "<group>";
+		};
+		CBE5602E4B50789AADB81B80 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C579564247C51F10671214DA /* Pods_YTSMovies.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +115,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA32147022258038005B0EA4 /* Build configuration list for PBXNativeTarget "YTSMovies" */;
 			buildPhases = (
+				729C639D2FE394B96E32BB27 /* [CP] Check Pods Manifest.lock */,
 				AA32145722258038005B0EA4 /* Sources */,
 				AA32145822258038005B0EA4 /* Frameworks */,
 				AA32145922258038005B0EA4 /* Resources */,
+				79C35E517EE8F6CA4021201A /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -128,19 +171,71 @@
 				AA32146C22258038005B0EA4 /* LaunchScreen.storyboard in Resources */,
 				AA32146922258038005B0EA4 /* Assets.xcassets in Resources */,
 				AA32146422258038005B0EA4 /* Main.storyboard in Resources */,
+				AA32148122258C25005B0EA4 /* CustomMovieTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		729C639D2FE394B96E32BB27 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-YTSMovies-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		79C35E517EE8F6CA4021201A /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-YTSMovies/Pods-YTSMovies-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-YTSMovies/Pods-YTSMovies-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AA32145722258038005B0EA4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA32148022258C25005B0EA4 /* CustomMovieTableViewCell.swift in Sources */,
 				AA32146722258038005B0EA4 /* YTSMovies.xcdatamodeld in Sources */,
 				AA32146122258038005B0EA4 /* ViewController.swift in Sources */,
 				AA32145F22258038005B0EA4 /* AppDelegate.swift in Sources */,
+				AA32148322259435005B0EA4 /* Movie.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,6 +379,7 @@
 		};
 		AA32147122258038005B0EA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E29B1662261BFF61CADA868C /* Pods-YTSMovies.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -302,6 +398,7 @@
 		};
 		AA32147222258038005B0EA4 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4270CB7CB10857C5BBF6FE7C /* Pods-YTSMovies.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
