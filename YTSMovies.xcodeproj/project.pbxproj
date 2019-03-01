@@ -57,12 +57,12 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		AA24B47F222983BF008EFABD /* Data Model */ = {
+		AA24B47F222983BF008EFABD /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				AA32148222259435005B0EA4 /* Movie.swift */,
 			);
-			path = "Data Model";
+			path = Model;
 			sourceTree = "<group>";
 		};
 		AA24B480222983DF008EFABD /* Controller */ = {
@@ -105,7 +105,7 @@
 				AA32145E22258038005B0EA4 /* AppDelegate.swift */,
 				AA24B480222983DF008EFABD /* Controller */,
 				AA24B48122298403008EFABD /* Views */,
-				AA24B47F222983BF008EFABD /* Data Model */,
+				AA24B47F222983BF008EFABD /* Model */,
 				AA32146822258038005B0EA4 /* Assets.xcassets */,
 				AA32146A22258038005B0EA4 /* LaunchScreen.storyboard */,
 				AA32146D22258038005B0EA4 /* Info.plist */,

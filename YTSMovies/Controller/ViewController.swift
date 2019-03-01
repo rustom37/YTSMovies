@@ -38,6 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMovieTableViewCell", for: indexPath) as! CustomMovieTableViewCell
         
         cell.movieTitle.text = moviesArray[indexPath.row].title
+        cell.movieTitle.adjustsFontSizeToFitWidth = true
         
         guard let posterURL = URL(string: moviesArray[indexPath.row].poster) else {
             fatalError("Couldn't receive the correct URL.")
