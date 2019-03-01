@@ -64,10 +64,18 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 print("Success! Got the movies data")
                 let moviesJSON : JSON = JSON(response.result.value!)
-
-                for index in 0...19 {
-                    self.moviesArray.append(Movie(title: moviesJSON["data"]["movies"][index]["title"].stringValue, poster: moviesJSON["data"]["movies"][index]["small_cover_image"].stringValue))
+                
+                let dataArray = moviesJSON["data"]["movies"]
+                
+                for movie in dataArray.arrayValue {
+                    let movieTitle = movie["title"].stringValue
+                    let movieURL = movie["small_cover_image"].stringValue
+                    self.moviesArray.append(Movie(title: movieTitle, poster: movieURL))
                 }
+
+//                for object in moviesJSON {
+//                    self.moviesArray.append(Movie(title: moviesJSON["data"]["movies"][]["title"].stringValue, poster: moviesJSON["data"]["movies"][index]["small_cover_image"].stringValue))
+//                }
                 self.configureTableView()
                 self.moviesTableView.reloadData()
             } else {
