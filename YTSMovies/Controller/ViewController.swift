@@ -14,7 +14,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let moviesURL = "https://yts.am/api/v2/list_movies.json"
     var moviesArray : [Movie] = [Movie]()
-    var imageArray : [UIImage] = [UIImage]()
+//    var imageArray : [UIImage] = [UIImage]()
     
     @IBOutlet weak var moviesTableView: UITableView!
     
@@ -52,7 +52,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 //            print("Error retrieving the contents of URL, \(error)")
 //        }
         //changeURLIntoImage()
-        cell.moviePoster.image = imageArray[indexPath.row]
+        cell.moviePoster.image = moviesArray[indexPath.row].poster
         
         return cell
     }
@@ -85,21 +85,23 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                     let movieTitle = movie["title"].stringValue
 //                    let movieURL = movie["small_cover_image"].stringValue
 //                    self.moviesArray.append(Movie(title: movieTitle, poster: movieURL))
-                    guard let posterURL = URL(string: movie["small_cover_image"].stringValue) else {
+                    
+                    guard let posterURL = URL(string: movie["medium_cover_image"].stringValue) else {
                         fatalError("Couldn't receive the correct URL.")
                     }
-                    
-                    do {
-                        let posterData = try Data(contentsOf: posterURL)
-                        
-                        guard let posterImage = UIImage(data: posterData) else {
-                            fatalError("Couldn't convert to Image.")
-                        }
-                        self.imageArray.append(posterImage)
-                    } catch {
-                        print("Error retrieving the contents of URL, \(error)")
-                    }
-                    self.moviesArray.append(Movie(title: movieTitle))
+//
+//                    do {
+//                        let posterData = try Data(contentsOf: posterURL)
+//
+//                        guard let posterImage = UIImage(data: posterData) else {
+//                            fatalError("Couldn't convert to Image.")
+//                        }
+//                        self.imageArray.append(posterImage)
+//                    } catch {
+//                        print("Error retrieving the contents of URL, \(error)")
+//                    }
+                    //self.imageArray.append(self.downloadImage(from: posterURL))
+                    self.moviesArray.append(Movie(title: movieTitle, poster: self.downloadImage(from: posterURL)))
                 }
 
                 self.configureTableView()
@@ -109,5 +111,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             }
         }
     }
+    
+    //MARK: - Loading Images Asynchronously
+    
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    func downloadImage(from url: URL) -> UIImage{
+        let imageFromURL = UIImage()
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+            DispatchQueue.main.async() {
+                guard UIImage(data: data) != nil else {
+                    fatalError("Couldn't convert to Image.")
+                }
+            }
+        }
+        
+         return imageFromURL
+    }
 }
-
