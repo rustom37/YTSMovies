@@ -14,7 +14,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     let moviesURL = "https://yts.am/api/v2/list_movies.json"
     var moviesArray : [Movie] = [Movie]()
-//    var imageArray : [UIImage] = [UIImage]()
     
     @IBOutlet weak var moviesTableView: UITableView!
     
@@ -29,7 +28,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         moviesTableView.register(UINib(nibName: "CustomMovieTableViewCell", bundle: nil),  forCellReuseIdentifier: "customMovieTableViewCell")
         
         configureTableView()
-
+        
     }
     
     //MARK: - TableView DataSource Methods
@@ -41,18 +40,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.movieTitle.text = moviesArray[indexPath.row].title
         cell.movieTitle.adjustsFontSizeToFitWidth = true
         
-//        guard let posterURL = URL(string: moviesArray[indexPath.row].poster) else {
-//            fatalError("Couldn't receive the correct URL.")
-//        }
+        guard let posterURL = URL(string: moviesArray[indexPath.row].poster) else {
+            fatalError("Couldn't receive the correct URL.")
+        }
         
-//        do {
-//            let posterData = try Data(contentsOf: posterURL)
-//            cell.moviePoster.image = UIImage(data: posterData)
-//        } catch {
-//            print("Error retrieving the contents of URL, \(error)")
-//        }
-        //changeURLIntoImage()
-        cell.moviePoster.image = moviesArray[indexPath.row].poster
+        downloadImage(from: posterURL, cell: cell)
         
         return cell
     }
@@ -83,25 +75,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 
                 for movie in dataArray.arrayValue {
                     let movieTitle = movie["title"].stringValue
-//                    let movieURL = movie["small_cover_image"].stringValue
-//                    self.moviesArray.append(Movie(title: movieTitle, poster: movieURL))
+                    let movieURL = movie["small_cover_image"].stringValue
                     
-                    guard let posterURL = URL(string: movie["medium_cover_image"].stringValue) else {
-                        fatalError("Couldn't receive the correct URL.")
-                    }
-//
-//                    do {
-//                        let posterData = try Data(contentsOf: posterURL)
-//
-//                        guard let posterImage = UIImage(data: posterData) else {
-//                            fatalError("Couldn't convert to Image.")
-//                        }
-//                        self.imageArray.append(posterImage)
-//                    } catch {
-//                        print("Error retrieving the contents of URL, \(error)")
-//                    }
-                    //self.imageArray.append(self.downloadImage(from: posterURL))
-                    self.moviesArray.append(Movie(title: movieTitle, poster: self.downloadImage(from: posterURL)))
+                    self.moviesArray.append(Movie(title: movieTitle, poster: movieURL))
                 }
 
                 self.configureTableView()
@@ -118,20 +94,16 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
-    func downloadImage(from url: URL) -> UIImage{
-        let imageFromURL = UIImage()
+    func downloadImage(from url: URL, cell: CustomMovieTableViewCell) {
+        
         print("Download Started")
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
             print("Download Finished")
             DispatchQueue.main.async() {
-                guard UIImage(data: data) != nil else {
-                    fatalError("Couldn't convert to Image.")
-                }
+                cell.moviePoster.image = UIImage(data: data)
             }
         }
-        
-         return imageFromURL
     }
 }

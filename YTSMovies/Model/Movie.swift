@@ -10,20 +10,19 @@ import UIKit
 class Movie {
     
     var title : String = ""
-//    var poster : String = ""
-    var poster = UIImage()
+    var poster : String = ""
     
-    init(title: String, poster: UIImage) {
+    init(title: String, poster: String) {
         self.title = title
         self.poster = poster
     }
     
-//    init(title: String) {
-//        self.title = title
-//    }
-//
-//    func setPoster(poster: String) {
-//        self.poster = poster
-//    }
+    init(title: String) {
+        self.title = title
+    }
+
+    func setPoster(poster: String) {
+        self.poster = poster
+    }
     
 }
