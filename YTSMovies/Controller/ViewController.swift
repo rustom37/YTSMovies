@@ -37,17 +37,19 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customMovieTableViewCell", for: indexPath) as! CustomMovieTableViewCell
         
+        cell.tag = indexPath.row
+        
         cell.movieTitle.text = moviesArray[indexPath.row].title
         cell.movieTitle.adjustsFontSizeToFitWidth = true
         
-        cell.prepareForReuse()
-        
-        guard let posterURL = URL(string: moviesArray[indexPath.row].poster) else {
-            fatalError("Couldn't receive the correct URL.")
+        if cell.tag == indexPath.row {
+            guard let posterURL = URL(string: moviesArray[indexPath.row].poster) else {
+                fatalError("Couldn't receive the correct URL.")
+            }
+            
+            downloadImage(from: posterURL, cell: cell)
         }
         
-        downloadImage(from: posterURL, cell: cell)
-
         return cell
     }
     
