@@ -24,4 +24,10 @@ class CustomMovieTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        moviePoster.image = nil
+    }
+    
 }
