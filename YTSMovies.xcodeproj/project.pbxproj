@@ -17,6 +17,7 @@
 		AA32148022258C25005B0EA4 /* CustomMovieTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32147E22258C25005B0EA4 /* CustomMovieTableViewCell.swift */; };
 		AA32148122258C25005B0EA4 /* CustomMovieTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA32147F22258C25005B0EA4 /* CustomMovieTableViewCell.xib */; };
 		AA32148322259435005B0EA4 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA32148222259435005B0EA4 /* Movie.swift */; };
+		AAFC39972231757E002B9173 /* Torrent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFC39962231757E002B9173 /* Torrent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		AA32147E22258C25005B0EA4 /* CustomMovieTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMovieTableViewCell.swift; sourceTree = "<group>"; };
 		AA32147F22258C25005B0EA4 /* CustomMovieTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomMovieTableViewCell.xib; sourceTree = "<group>"; };
 		AA32148222259435005B0EA4 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		AAFC39962231757E002B9173 /* Torrent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Torrent.swift; sourceTree = "<group>"; };
 		C579564247C51F10671214DA /* Pods_YTSMovies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_YTSMovies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E29B1662261BFF61CADA868C /* Pods-YTSMovies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-YTSMovies.debug.xcconfig"; path = "Pods/Target Support Files/Pods-YTSMovies/Pods-YTSMovies.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -57,12 +59,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		AA24B47F222983BF008EFABD /* Model */ = {
+		AA24B47F222983BF008EFABD /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				AA32148222259435005B0EA4 /* Movie.swift */,
+				AAFC39962231757E002B9173 /* Torrent.swift */,
 			);
-			path = Model;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		AA24B480222983DF008EFABD /* Controller */ = {
@@ -105,7 +108,7 @@
 				AA32145E22258038005B0EA4 /* AppDelegate.swift */,
 				AA24B480222983DF008EFABD /* Controller */,
 				AA24B48122298403008EFABD /* Views */,
-				AA24B47F222983BF008EFABD /* Model */,
+				AA24B47F222983BF008EFABD /* Models */,
 				AA32146822258038005B0EA4 /* Assets.xcassets */,
 				AA32146A22258038005B0EA4 /* LaunchScreen.storyboard */,
 				AA32146D22258038005B0EA4 /* Info.plist */,
@@ -257,6 +260,7 @@
 			files = (
 				AA32148022258C25005B0EA4 /* CustomMovieTableViewCell.swift in Sources */,
 				AA32146722258038005B0EA4 /* YTSMovies.xcdatamodeld in Sources */,
+				AAFC39972231757E002B9173 /* Torrent.swift in Sources */,
 				AA32146122258038005B0EA4 /* ViewController.swift in Sources */,
 				AA32145F22258038005B0EA4 /* AppDelegate.swift in Sources */,
 				AA32148322259435005B0EA4 /* Movie.swift in Sources */,
