@@ -19,25 +19,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="104.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Q5S-4F-WBF">
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Q5S-4F-WBF">
                         <rect key="frame" x="9" y="9" width="80" height="80"/>
                         <edgeInsets key="layoutMargins" top="10" left="10" bottom="10" right="10"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zcr-zy-d6I">
-                        <rect key="frame" x="97" y="39" width="207" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zcr-zy-d6I">
+                        <rect key="frame" x="97" y="42" width="29" height="20.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="Zcr-zy-d6I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="28" id="EID-EJ-woz"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="Zcr-zy-d6I" secondAttribute="bottom" constant="34" id="Jku-b8-COw"/>
-                    <constraint firstItem="Q5S-4F-WBF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="9" id="mKd-Kd-odB"/>
-                    <constraint firstAttribute="bottom" secondItem="Q5S-4F-WBF" secondAttribute="bottom" constant="15.5" id="ppu-iL-4jq"/>
-                    <constraint firstItem="Q5S-4F-WBF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="9" id="psT-Wz-ASK"/>
-                    <constraint firstItem="Zcr-zy-d6I" firstAttribute="leading" secondItem="Q5S-4F-WBF" secondAttribute="trailing" constant="8" id="q2C-aR-IfX"/>
-                    <constraint firstItem="Zcr-zy-d6I" firstAttribute="leading" secondItem="Q5S-4F-WBF" secondAttribute="trailing" constant="8" id="wr7-Ij-Ufg"/>
+                    <constraint firstItem="Zcr-zy-d6I" firstAttribute="leading" secondItem="Q5S-4F-WBF" secondAttribute="trailing" constant="8" symbolic="YES" id="968-4n-ffG"/>
+                    <constraint firstItem="Zcr-zy-d6I" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="97" id="CTI-pE-RgT"/>
+                    <constraint firstItem="Q5S-4F-WBF" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-2" id="PxD-2H-2eY"/>
+                    <constraint firstItem="Zcr-zy-d6I" firstAttribute="leading" secondItem="Q5S-4F-WBF" secondAttribute="trailing" constant="8" id="e2e-1N-neL"/>
+                    <constraint firstItem="Q5S-4F-WBF" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="-7" id="kkz-zD-sOT"/>
+                    <constraint firstItem="Zcr-zy-d6I" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="uha-nq-lxh"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="Q5S-4F-WBF" secondAttribute="bottom" constant="5" id="xuZ-a2-5c3"/>
+                    <constraint firstItem="Zcr-zy-d6I" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="31" id="yS7-Fj-ydO"/>
                 </constraints>
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>

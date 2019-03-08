@@ -6,11 +6,12 @@
 //  Copyright © 2019 Steve Rustom. All rights reserved.
 //
 import UIKit
+import SwiftyJSON
 
-struct Movie {
+class Movie {
     
     var title : String = ""
-    var poster : String = ""
+    var poster : URL
     var summary : String = ""
     var dateUploadedUnix : Int = 0
     var slug : String = ""
@@ -34,33 +35,56 @@ struct Movie {
     var titleEnglish : String = ""
     var torrentsArray : [Torrent] = [Torrent]()
     
-    
-    init(title: String, poster: String, summary : String, dateUploadedUnix : Int, slug : String, imdbCode : String, dateUploaded : Date, rating : Double, synopsis : String, language : String, id : Int, runtime : Int, year : Int, state : String, genres : [String], description : String, backgroundImageOriginal : URL, backgroundImage : URL, largeCoverImage : URL, mediumCoverImage : URL, url : URL, titleLong : String, titleEnglish : String, torrentsArray : [Torrent]) {
+    static func urlConverter(txt: String) -> URL {
         
-        self.title = title
-        self.poster = poster
-        self.summary = summary
-        self.dateUploadedUnix = dateUploadedUnix
-        self.slug = slug
-        self.imdbCode = imdbCode
-        self.dateUploaded = dateUploaded
-        self.rating = rating
-        self.synopsis = synopsis
-        self.language = language
-        self.id = id
-        self.runtime = runtime
-        self.year = year
-        self.state = state
-        self.genres = genres
-        self.description = description
-        self.backgroundImageOriginal = backgroundImageOriginal
-        self.backgroundImage = backgroundImage
-        self.largeCoverImage = largeCoverImage
-        self.mediumCoverImage = mediumCoverImage
-        self.url = url
-        self.titleLong = titleLong
-        self.titleEnglish = titleEnglish
-        self.torrentsArray = torrentsArray
+        guard let url = URL(string: txt) else {
+            fatalError("Couldn't convert to URL.")
+        }
+        
+        return url
     }
     
+    init(movie: JSON, dateFormatter: DateFormatter) {
+        
+        guard let movieDate = dateFormatter.date(from: movie["date_uploaded"].stringValue) else {
+            fatalError("Couldn't convert to Date.")
+        }
+        
+        title = movie["title"].stringValue
+        poster = Movie.urlConverter(txt: movie["small_cover_image"].stringValue)
+        summary = movie["summary"].stringValue
+        dateUploadedUnix = movie["date_uploaded_unix"].intValue
+        slug = movie["slug"].stringValue
+        imdbCode = movie["imdb_code"].stringValue
+        dateUploaded = movieDate
+        rating = movie["rating"].doubleValue
+        synopsis = movie["synopsis"].stringValue
+        language = movie["language"].stringValue
+        id = movie["id"].intValue
+        runtime = movie["runtime"].intValue
+        year = movie["year"].intValue
+        state = movie["state"].stringValue
+        
+        var movieGenres = [String]()
+        for genre in movie["genres"].arrayValue {
+            movieGenres.append(genre.stringValue)
+        }
+        genres = movieGenres
+        
+        description = movie["description_full"].stringValue
+        backgroundImageOriginal = Movie.urlConverter(txt: movie["background_image_original"].stringValue)
+        backgroundImage = Movie.urlConverter(txt: movie["background_image"].stringValue)
+        largeCoverImage = Movie.urlConverter(txt: movie["large_cover_image"].stringValue)
+        mediumCoverImage = Movie.urlConverter(txt: movie["medium_cover_image"].stringValue)
+        url = Movie.urlConverter(txt: movie["url"].stringValue)
+        titleLong = movie["title_long"].stringValue
+        titleEnglish = movie["title_english"].stringValue
+        
+        var movieTorrents = [Torrent]()
+        for torrent in movie["torrents"].arrayValue {
+            
+            movieTorrents.append(Torrent(torrent: torrent, dateFormatter: dateFormatter))
+        }
+        torrentsArray = movieTorrents
+    }
 }
