@@ -25,7 +25,15 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         moviesTableView.delegate = self
         moviesTableView.dataSource = self
         
-        request.makeNetworkRequest(requestURL: moviesURL, moviesTableView: moviesTableView, moviesArray: moviesArray)
+        request.getMoviesData(url: moviesURL) { array in
+            
+            DispatchQueue.main.async {
+                self.moviesArray = array
+                self.configureTableView()
+                self.moviesTableView.reloadData()
+            }
+            
+        }
         
         moviesTableView.register(UINib(nibName: "CustomMovieTableViewCell", bundle: nil),  forCellReuseIdentifier: "customMovieTableViewCell")
         
@@ -44,8 +52,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         cell.movieTitle.text = moviesArray[indexPath.row].title
         cell.movieTitle.adjustsFontSizeToFitWidth = true
-        
-        request.downloadImage(from: moviesArray[indexPath.row].poster, cell: cell, tableView: tableView, index: indexPath)
+        cell.moviePoster.image = nil
+        downloadImage(from: moviesArray[indexPath.row].poster, index: indexPath)
 
         return cell
     }
@@ -55,76 +63,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         moviesTableView.estimatedRowHeight = 150.0
     }
     
-//    //MARK: - Networking
-//
-//    func makeNetworkRequest(requestURL: String) {
-//
-//        let dateFormatter = DateFormatter()
-//        dateFormatter.dateFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ss"
-//
-//        getMoviesData(url: requestURL) { array in
-//
-//            DispatchQueue.main.async {
-//
-//                for movie in array.arrayValue {
-//                    self.moviesArray.append(Movie(movie: movie, dateFormatter: dateFormatter))
-//                }
-//
-//                self.configureTableView()
-//                self.moviesTableView.reloadData()
-//            }
-//
-//        }
-//
-//    }
-//
-//
-//    func getMoviesData(url: String, completionHandler: @escaping ((JSON) -> Void)) {
-//
-//        Alamofire.request(url, method: .get).responseJSON {
-//
-//            response in
-//            if response.result.isSuccess {
-//
-//                print("Success! Got the movies data")
-//                let moviesJSON : JSON = JSON(response.result.value!)
-//
-//                let dataArray = moviesJSON["data"]["movies"]
-//
-//                completionHandler(dataArray)
-//
-//            } else {
-//                print("Error: \(String(describing: response.result.error))")
-//            }
-//        }
-//    }
-//
-//    //MARK: - Loading Images Asynchronously
-//
-//    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-//        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-//    }
-//
-//    func downloadImage(from url: URL, cell: CustomMovieTableViewCell, tableView: UITableView, index: IndexPath) {
-//
-//        //tableView.cellForRow(at: index)?.imageView?.image = nil
-//
-//        print("Download Started")
-//        getData(from: url) { data, response, error in
-//            guard let data = data, error == nil else { return }
-//            print(response?.suggestedFilename ?? url.lastPathComponent)
-//            print("Download Finished")
-//
-//            DispatchQueue.main.async() {
-//
-//                if tableView.cellForRow(at: index) != nil  {
-//                    if tableView.cellForRow(at: index)?.imageView?.image == UIImage(data: data) {
-//                        tableView.cellForRow(at: index)!.imageView?.image = nil
-//                    } else {
-//                        tableView.cellForRow(at: index)!.imageView?.image = UIImage(data: data)
-//                    }
-//                }
-//            }
-//        }
-//    }
+
+    //MARK: - Loading Images Asynchronously
+
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+
+    func downloadImage(from url: URL, index: IndexPath) {
+
+        print("Download Started")
+        getData(from: url) { data, response, error in
+            guard let data = data, error == nil else { return }
+            print(response?.suggestedFilename ?? url.lastPathComponent)
+            print("Download Finished")
+
+            DispatchQueue.main.async() {
+                let posterURL = self.moviesArray[index.row].poster
+                if let currentCell = self.moviesTableView.cellForRow(at: index) as? CustomMovieTableViewCell, posterURL == url {
+                    currentCell.moviePoster.image = UIImage(data: data)
+                }
+            }
+        }
+    }
 }
