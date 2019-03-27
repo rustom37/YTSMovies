@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -53,7 +52,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.movieTitle.text = moviesArray[indexPath.row].title
         cell.movieTitle.adjustsFontSizeToFitWidth = true
         cell.moviePoster.image = nil
-        downloadImage(from: moviesArray[indexPath.row].poster, index: indexPath)
+        downloadImage(from: moviesArray[indexPath.row].poster!, index: indexPath)
 
         return cell
     }

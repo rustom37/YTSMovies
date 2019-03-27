@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import SwiftyJSON
+import AlamofireObjectMapper
 
 class GetRequest {
     
@@ -16,26 +16,14 @@ class GetRequest {
     
     func getMoviesData(url: String, completionHandler: @escaping (([Movie]) -> Void)) {
         
-        var moviesArray = [Movie]()
-        
-        Alamofire.request(url, method: .get).responseJSON {
+        Alamofire.request(url).responseArray(keyPath: "data.movies") { (response: DataResponse<[Movie]>) in
             
-            response in
             if response.result.isSuccess {
                 
                 print("Success! Got the movies data")
-                let moviesJSON : JSON = JSON(response.result.value!)
+                let movies = response.result.value
                 
-                let dataArray = moviesJSON["data"]["movies"]
-                
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ss"
-                
-                for movie in dataArray.arrayValue {
-                    moviesArray.append(Movie(movie: movie, dateFormatter: dateFormatter))
-                }
-                
-                completionHandler(moviesArray)
+                completionHandler(movies!)
                 
             } else {
                 print("Error: \(String(describing: response.result.error))")

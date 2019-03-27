@@ -6,7 +6,7 @@ target 'YTSMovies' do
   use_frameworks!
 
   # Pods for YTSMovies
-pod 'SwiftyJSON', '~> 4.0'
 pod 'Alamofire'
+pod 'AlamofireObjectMapper', '~> 5.2'
 
 end
