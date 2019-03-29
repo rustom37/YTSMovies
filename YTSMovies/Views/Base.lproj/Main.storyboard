@@ -18,24 +18,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile picture" translatesAutoresizingMaskIntoConstraints="NO" id="ORS-km-sUx">
-                                <rect key="frame" x="41" y="107" width="292" height="319.5"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estephan &quot;Steve&quot; Rustom" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXU-MI-tfs">
-                                <rect key="frame" x="41" y="477.5" width="292" height="20.5"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="Zdr-jj-BQ6">
+                                <rect key="frame" x="28" y="163" width="319.5" height="340"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profile picture" translatesAutoresizingMaskIntoConstraints="NO" id="ORS-km-sUx">
+                                        <rect key="frame" x="0.0" y="0.0" width="319.5" height="319.5"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Estephan &quot;Steve&quot; Rustom" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yXU-MI-tfs">
+                                        <rect key="frame" x="0.0" y="319.5" width="319.5" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="yXU-MI-tfs" firstAttribute="top" secondItem="ORS-km-sUx" secondAttribute="bottom" constant="51" id="HB8-oo-NLW"/>
-                            <constraint firstItem="ORS-km-sUx" firstAttribute="top" secondItem="6Mu-js-eLI" secondAttribute="top" constant="43" id="IzW-NM-HJw"/>
-                            <constraint firstItem="ORS-km-sUx" firstAttribute="leading" secondItem="6Mu-js-eLI" secondAttribute="leading" constant="41" id="bwE-5d-HJp"/>
-                            <constraint firstItem="yXU-MI-tfs" firstAttribute="leading" secondItem="6Mu-js-eLI" secondAttribute="leading" constant="41" id="d3i-Wb-un9"/>
-                            <constraint firstItem="6Mu-js-eLI" firstAttribute="trailing" secondItem="yXU-MI-tfs" secondAttribute="trailing" constant="42" id="h5D-6k-Ky4"/>
-                            <constraint firstItem="6Mu-js-eLI" firstAttribute="trailing" secondItem="ORS-km-sUx" secondAttribute="trailing" constant="42" id="r1w-Kn-5nh"/>
+                            <constraint firstItem="6Mu-js-eLI" firstAttribute="bottom" secondItem="Zdr-jj-BQ6" secondAttribute="bottom" constant="164" id="27A-C9-B2L"/>
+                            <constraint firstItem="6Mu-js-eLI" firstAttribute="trailing" secondItem="Zdr-jj-BQ6" secondAttribute="trailing" constant="27.5" id="Adq-Y5-pR0"/>
+                            <constraint firstItem="Zdr-jj-BQ6" firstAttribute="leading" secondItem="6Mu-js-eLI" secondAttribute="leading" constant="28" id="Icn-OZ-bhE"/>
+                            <constraint firstItem="Zdr-jj-BQ6" firstAttribute="top" secondItem="6Mu-js-eLI" secondAttribute="top" constant="99" id="Mgy-8E-eCl"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Mu-js-eLI"/>
                     </view>
