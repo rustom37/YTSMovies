@@ -39,19 +39,8 @@ class Movie: Mappable {
         
     }
     
-    static func urlConverter(txt: String) -> URL {
-
-        guard let url = URL(string: txt) else {
-            fatalError("Couldn't convert to URL.")
-        }
-
-        return url
-    }
-    
     func mapping(map: Map) {
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ss"
         var date = ""
         var txt = ""
         var arr = [String]()
@@ -62,13 +51,10 @@ class Movie: Mappable {
         var txt5 = ""
         
         date <- map["date_uploaded"]
-        guard let movieDate = dateFormatter.date(from: date) else {
-                fatalError("Couldn't convert to Date.")
-        }
-        dateUploaded = movieDate
+        dateUploaded = dateConverter(txt: date)
         title <- map["title"]
         txt <- map["small_cover_image"]
-        poster = Movie.urlConverter(txt: txt)
+        poster = urlConverter(txt: txt)
         summary <- map["summary"]
         dateUploadedUnix <- map["date_uploaded_unix"]
         slug <- map["slug"]
@@ -88,15 +74,15 @@ class Movie: Mappable {
         genres = movieGenres
         description <- map["description_full"]
         txt1 <- map["background_image_original"]
-        backgroundImageOriginal = Movie.urlConverter(txt: txt1)
+        backgroundImageOriginal = urlConverter(txt: txt1)
         txt2 <- map["background_image"]
-        backgroundImage = Movie.urlConverter(txt: txt2)
+        backgroundImage = urlConverter(txt: txt2)
         txt3 <- map["large_cover_image"]
-        largeCoverImage = Movie.urlConverter(txt: txt3)
+        largeCoverImage = urlConverter(txt: txt3)
         txt4 <- map["medium_cover_image"]
-        mediumCoverImage = Movie.urlConverter(txt: txt4)
+        mediumCoverImage = urlConverter(txt: txt4)
         txt5 <- map["url"]
-        url = Movie.urlConverter(txt: txt5)
+        url = urlConverter(txt: txt5)
         titleLong <- map["title_long"]
         titleEnglish <- map["title_english"]
         torrentsArray <- map["torrents"]

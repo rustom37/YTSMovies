@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -16,6 +15,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let request = GetRequest()
     
     @IBOutlet weak var moviesTableView: UITableView!
+    
+    var titleToPass: String?
+    var descriptionToPass: String?
+    var posterToPass: UIImage?
+    var ratingToPass: Double?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,10 +55,44 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
 
         cell.movieTitle.text = moviesArray[indexPath.row].title
         cell.movieTitle.adjustsFontSizeToFitWidth = true
+        cell.movieTitle.minimumScaleFactor = 0.25
         cell.moviePoster.image = nil
-        downloadImage(from: moviesArray[indexPath.row].poster!, index: indexPath)
+        request.downloadImage(from: moviesArray[indexPath.row].poster!, index: indexPath, array: moviesArray, tableView: moviesTableView)
 
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        titleToPass = moviesArray[indexPath.row].title
+        descriptionToPass = moviesArray[indexPath.row].description
+        ratingToPass = moviesArray[indexPath.row].rating
+        
+        do {
+            let data = try Data(contentsOf: moviesArray[indexPath.row].mediumCoverImage!)
+            posterToPass = UIImage(data: data)
+        } catch {
+            fatalError("Couldn't load image.")
+        }
+
+        performSegue(withIdentifier: "toMovieDetails", sender: self)
+    }
+    
+    @IBAction func creatorPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "goToCreator", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "toMovieDetails" {
+            let nav = segue.destination as! UINavigationController
+            let destVC = nav.topViewController as! movieViewController
+            
+            destVC.movieTitlePicked = titleToPass!
+            destVC.movieDescriptionPicked = descriptionToPass!
+            destVC.movieRatingPicked = ratingToPass!
+            destVC.moviePoster = posterToPass!
+        } 
     }
     
     func configureTableView() {
@@ -62,27 +100,4 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         moviesTableView.estimatedRowHeight = 150.0
     }
     
-
-    //MARK: - Loading Images Asynchronously
-
-    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
-    }
-
-    func downloadImage(from url: URL, index: IndexPath) {
-
-        print("Download Started")
-        getData(from: url) { data, response, error in
-            guard let data = data, error == nil else { return }
-            print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
-
-            DispatchQueue.main.async() {
-                let posterURL = self.moviesArray[index.row].poster
-                if let currentCell = self.moviesTableView.cellForRow(at: index) as? CustomMovieTableViewCell, posterURL == url {
-                    currentCell.moviePoster.image = UIImage(data: data)
-                }
-            }
-        }
-    }
 }

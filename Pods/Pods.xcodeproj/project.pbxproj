@@ -695,7 +695,7 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		1EAFDB7DE59A16060DF36FC40DC2E750 /* Release */ = {
+		1A6D88974A19B903BD70FAB353EA2CDE /* Release */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2EBCD0016B1F35258100A2C93CDA7850 /* Alamofire.xcconfig */;
 			buildSettings = {
@@ -723,7 +723,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1076,7 +1076,7 @@
 			};
 			name = Debug;
 		};
-		F9711F223F590669E94B504F3CC44301 /* Debug */ = {
+		F23A6EEBDAD1F495009A4FC42D2BF2B2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 2EBCD0016B1F35258100A2C93CDA7850 /* Alamofire.xcconfig */;
 			buildSettings = {
@@ -1104,7 +1104,7 @@
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1144,8 +1144,8 @@
 		427F0F003A1AD80AE00155AFCDEFAC20 /* Build configuration list for PBXNativeTarget "Alamofire" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				F9711F223F590669E94B504F3CC44301 /* Debug */,
-				1EAFDB7DE59A16060DF36FC40DC2E750 /* Release */,
+				F23A6EEBDAD1F495009A4FC42D2BF2B2 /* Debug */,
+				1A6D88974A19B903BD70FAB353EA2CDE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

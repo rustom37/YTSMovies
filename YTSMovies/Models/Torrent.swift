@@ -29,8 +29,6 @@ class Torrent: Mappable {
     func mapping(map: Map) {
         
         var txt = ""
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy'-'MM'-'dd' 'HH':'mm':'ss"
         var date = ""
         
         seeds <- map["seeds"]
@@ -38,12 +36,9 @@ class Torrent: Mappable {
         sizeBytes <- map["size_bytes"]
         quality <- map["quality"]
         date <- map["date_uploaded"]
-        guard let torrentDate = dateFormatter.date(from: date) else {
-            fatalError("Couldn't convert to Date.")
-        }
-        torrentDateUploaded = torrentDate
+        torrentDateUploaded = dateConverter(txt: date)
         txt <- map["url"]
-        torrentUrl = Movie.urlConverter(txt: txt)
+        torrentUrl = urlConverter(txt: txt)
         torrentDateUploadedUnix <- map["date_uploaded_unix"]
         peers <- map["peers"]
         hash <- map["hash"]
