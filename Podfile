@@ -7,6 +7,7 @@ target 'YTSMovies' do
 
   # Pods for YTSMovies
 pod 'Alamofire'
-pod 'AlamofireObjectMapper', '~> 5.2'
+pod 'AlamofireObjectMapper'
+pod 'ReactiveSwift', '~> 5.0'
 
 end

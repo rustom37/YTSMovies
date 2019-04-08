@@ -7,12 +7,16 @@
 //
 
 import UIKit
+import ReactiveSwift
+import Result
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let moviesURL = "https://yts.am/api/v2/list_movies.json"
     var moviesArray : [Movie] = [Movie]()
     let request = GetRequest()
+    var disposable : Disposable?
+    let movieLogger = MovieLogger()
     
     @IBOutlet weak var moviesTableView: UITableView!
     
@@ -28,15 +32,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         moviesTableView.delegate = self
         moviesTableView.dataSource = self
         
-        request.getMoviesData(url: moviesURL) { array in
-            
-            DispatchQueue.main.async {
-                self.moviesArray = array
-                self.configureTableView()
-                self.moviesTableView.reloadData()
-            }
-            
-        }
+        let observerUI = Signal<[Movie], NoError>.Observer(value: { (array) in
+            self.moviesArray = array
+            self.configureTableView()
+            self.moviesTableView.reloadData()
+        }, failed: { (error) in
+            print("UI Observer Error: \(error).")
+        }, completed: {
+            print("UI Observer Completed.")
+        }, interrupted: {
+            print("UI Observer Interrupted.")
+        })
+        
+        let observerLogger = Signal<[String], NoError>.Observer(value: { (array) in
+           self.movieLogger.displayTitles(array: array)
+        }, failed: { (error) in
+            print("Logger Observer Error: \(error).")
+        }, completed: {
+            print("Logger Observer Completed.")
+        }, interrupted: {
+            print("Logger Observer Interrupted.")
+        })
+        
+        let spUI = request.getMoviesData(url: moviesURL, forceRefresh: false)
+        
+        let spLogger = request.getMovieTitles(url: moviesURL)
+        
+        disposable = spUI.start(observerUI)
+        disposable = spLogger.start(observerLogger)
         
         moviesTableView.register(UINib(nibName: "CustomMovieTableViewCell", bundle: nil),  forCellReuseIdentifier: "customMovieTableViewCell")
         
@@ -86,7 +109,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         if segue.identifier == "toMovieDetails" {
             let nav = segue.destination as! UINavigationController
-            let destVC = nav.topViewController as! movieViewController
+            let destVC = nav.topViewController as! MovieViewController
             
             destVC.movieTitlePicked = titleToPass!
             destVC.movieDescriptionPicked = descriptionToPass!

@@ -90,7 +90,7 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="YTSMovies" id="AtC-wa-jgF">
-                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="1yb-cc-Nrk">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="1yb-cc-Nrk">
                             <connections>
                                 <action selector="creatorPressed:" destination="BYZ-38-t0r" id="mRf-Gg-S5M"/>
                                 <segue destination="l7w-UM-ndu" kind="show" identifier="goToCreator" id="J5J-oc-0Ea"/>
@@ -109,7 +109,7 @@
         <!--YTSMovies-->
         <scene sceneID="aeN-EQ-T8T">
             <objects>
-                <viewController id="cEj-zn-Axo" customClass="movieViewController" customModule="YTSMovies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="cEj-zn-Axo" customClass="MovieViewController" customModule="YTSMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="myMovieView" id="GJY-TP-wGT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
