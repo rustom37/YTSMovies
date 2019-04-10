@@ -14,17 +14,20 @@ import Result
 class GetRequest {
     
     //MARK: - Networking
-    
+    var limit: Int = 20
     var disposable: Disposable?
     
     private var signalProducerMoviesData: SignalProducer<[Movie], NoError>?
+     private var signalProducerTitlesData: SignalProducer<[String], NoError>?
     
     func getMoviesData(url: String, forceRefresh: Bool) -> SignalProducer<[Movie], NoError> {
         if let signalProducerMoviesData = signalProducerMoviesData, !forceRefresh {
             return signalProducerMoviesData
         } else {
             let sp = SignalProducer<[Movie], NoError> { observer, Lifetime in
-                Alamofire.request(url).responseArray(keyPath: "data.movies") { (response: DataResponse<[Movie]>) in
+                let finalURL = "" + url + "?limit=" + String(self.limit)
+                self.limit += 1
+                Alamofire.request(finalURL).responseArray(keyPath: "data.movies") { (response: DataResponse<[Movie]>) in
                     if response.result.isSuccess {
                         print("Success! Got the movies data.")
                         guard let movies = response.result.value else {
@@ -43,8 +46,8 @@ class GetRequest {
         }
     }
     
-    func getMovieTitles(url: String) -> SignalProducer<[String], NoError> {
-        let sp = self.getMoviesData(url: url, forceRefresh: true).flatMap(.latest) { (array) -> SignalProducer<[String], NoError> in
+    func getMovieTitles(url: String, forceRefresh: Bool) -> SignalProducer<[String], NoError> {
+        let sp = self.getMoviesData(url: url, forceRefresh: forceRefresh).flatMap(.latest) { (array) -> SignalProducer<[String], NoError> in
             return SignalProducer<[String], NoError> { observer, Lifetime in
                 observer.send(value: array.compactMap { $0.title })
                 observer.sendCompleted()

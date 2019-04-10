@@ -8,6 +8,7 @@
 
 import UIKit
 import ReactiveSwift
+import ReactiveCocoa
 import Result
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
@@ -17,6 +18,9 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     let request = GetRequest()
     var disposable : Disposable?
     let movieLogger = MovieLogger()
+    var property: MutableProperty<[Movie]>?
+    var actionUI : Action<String, [Movie], NoError>?
+    var actionLogger : Action<String, [String], NoError>?
     
     @IBOutlet weak var moviesTableView: UITableView!
     
@@ -24,46 +28,57 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var descriptionToPass: String?
     var posterToPass: UIImage?
     var ratingToPass: Double?
+
+    var spUI: SignalProducer<[Movie], NoError>?
+    var spLogger: SignalProducer<[String], NoError>?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .refresh, target: self, action: #selector(refreshClicked))
+        
         moviesTableView.delegate = self
         moviesTableView.dataSource = self
         
-        let observerUI = Signal<[Movie], NoError>.Observer(value: { (array) in
+        actionUI = Action<String, [Movie], NoError> { (url) -> SignalProducer<[Movie], NoError> in
+            self.request.getMoviesData(url: url, forceRefresh: true)
+        }
+        
+        actionLogger = Action<String, [String], NoError> { (url) -> SignalProducer<[String], NoError> in
+            self.request.getMovieTitles(url: url, forceRefresh: false)
+        }
+        
+        actionUI?.values.observeValues({ (array) in
             self.moviesArray = array
             self.configureTableView()
             self.moviesTableView.reloadData()
-        }, failed: { (error) in
-            print("UI Observer Error: \(error).")
-        }, completed: {
-            print("UI Observer Completed.")
-        }, interrupted: {
-            print("UI Observer Interrupted.")
         })
         
-        let observerLogger = Signal<[String], NoError>.Observer(value: { (array) in
+        actionUI?.completed.observeValues({
+            print("Action UI completed.")
+        })
+        
+        actionLogger?.values.observeValues({ (array) in
            self.movieLogger.displayTitles(array: array)
-        }, failed: { (error) in
-            print("Logger Observer Error: \(error).")
-        }, completed: {
-            print("Logger Observer Completed.")
-        }, interrupted: {
-            print("Logger Observer Interrupted.")
         })
         
-        let spUI = request.getMoviesData(url: moviesURL, forceRefresh: false)
+        actionLogger?.completed.observeValues({
+            print("Action Logger completed.")
+        })
         
-        let spLogger = request.getMovieTitles(url: moviesURL)
-        
-        disposable = spUI.start(observerUI)
-        disposable = spLogger.start(observerLogger)
+        actionUI!.apply(moviesURL).start()
+        actionLogger!.apply(moviesURL).start()
         
         moviesTableView.register(UINib(nibName: "CustomMovieTableViewCell", bundle: nil),  forCellReuseIdentifier: "customMovieTableViewCell")
         
         configureTableView()
+    }
+
+    @objc func refreshClicked() {
+        print("Refresh Button Clicked!")
+        self.actionUI!.apply(self.moviesURL).start()
+        self.actionLogger!.apply(self.moviesURL).start()
     }
     
     //MARK: - TableView DataSource Methods
@@ -98,29 +113,21 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             fatalError("Couldn't load image.")
         }
 
-        performSegue(withIdentifier: "toMovieDetails", sender: self)
+        var vc: MovieViewController = self.storyboard?.instantiateViewController(withIdentifier: "MovieViewController") as! MovieViewController
+        vc.movieTitlePicked = titleToPass!
+        vc.movieDescriptionPicked = descriptionToPass!
+        vc.movieRatingPicked = ratingToPass!
+        vc.moviePoster = posterToPass!
+        self.navigationController?.pushViewController(vc, animated: true)
+
     }
     
     @IBAction func creatorPressed(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "goToCreator", sender: self)
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "toMovieDetails" {
-            let nav = segue.destination as! UINavigationController
-            let destVC = nav.topViewController as! MovieViewController
-            
-            destVC.movieTitlePicked = titleToPass!
-            destVC.movieDescriptionPicked = descriptionToPass!
-            destVC.movieRatingPicked = ratingToPass!
-            destVC.moviePoster = posterToPass!
-        } 
-    }
-    
     func configureTableView() {
         moviesTableView.rowHeight = UITableView.automaticDimension
         moviesTableView.estimatedRowHeight = 150.0
     }
-    
 }

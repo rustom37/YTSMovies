@@ -99,7 +99,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="moviesTableView" destination="W0s-DE-AU2" id="PiE-4O-LvL"/>
-                        <segue destination="c8A-8Q-jpN" kind="presentation" identifier="toMovieDetails" id="9hV-1a-tE9"/>
+                        <segue destination="c8A-8Q-jpN" kind="push" identifier="toMoviesDetails" id="g3D-Tz-ov9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -109,7 +109,7 @@
         <!--YTSMovies-->
         <scene sceneID="aeN-EQ-T8T">
             <objects>
-                <viewController id="cEj-zn-Axo" customClass="MovieViewController" customModule="YTSMovies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieViewController" id="cEj-zn-Axo" customClass="MovieViewController" customModule="YTSMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" restorationIdentifier="myMovieView" id="GJY-TP-wGT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -143,13 +143,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="HzS-ND-Igw"/>
                     </view>
-                    <navigationItem key="navigationItem" title="YTSMovies" id="2vK-Gk-BKC">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="REV-ed-yHJ">
-                            <connections>
-                                <action selector="doneButtonPressed:" destination="cEj-zn-Axo" id="S00-zS-E8h"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="YTSMovies" id="2vK-Gk-BKC"/>
                     <connections>
                         <outlet property="movieDescription" destination="ods-rR-Yuz" id="Deo-Ty-cEY"/>
                         <outlet property="movieRating" destination="LbZ-Ih-3xk" id="uzF-VG-Y46"/>
@@ -184,6 +178,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="c8A-8Q-jpN" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="i2T-9X-MIN"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="uPv-IB-jLC">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
