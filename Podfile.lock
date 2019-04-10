@@ -3,14 +3,9 @@ PODS:
   - AlamofireObjectMapper (5.2.0):
     - Alamofire (~> 4.7)
     - ObjectMapper (~> 3.4)
-  - Bond (7.4.1):
-    - Differ (~> 1.3)
-    - ReactiveKit (~> 3.10)
-  - Differ (1.4.1)
   - ObjectMapper (3.4.2)
   - ReactiveCocoa (9.0.0):
     - ReactiveSwift (~> 5.0)
-  - ReactiveKit (3.10.0)
   - ReactiveSwift (5.0.0):
     - Result (~> 4.1)
   - Result (4.1.0)
@@ -18,7 +13,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireObjectMapper
-  - Bond
   - ReactiveCocoa
   - ReactiveSwift (~> 5.0)
 
@@ -26,25 +20,19 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - AlamofireObjectMapper
-    - Bond
-    - Differ
     - ObjectMapper
     - ReactiveCocoa
-    - ReactiveKit
     - ReactiveSwift
     - Result
 
 SPEC CHECKSUMS:
   Alamofire: ae5c501addb7afdbb13687d7f2f722c78734c2d3
   AlamofireObjectMapper: 92b6ce2423a9d159e686f6a1d514a009bf903ddc
-  Bond: 6e73608fdd9d44e84f52f9bf9d56098ad80cbbb1
-  Differ: ca4350872e32a1aeedf3d9e2d9e47127833bfa9c
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
   ReactiveCocoa: 29709cf0cc7502ddd04a51220e10ee0336d8bec8
-  ReactiveKit: af0d53664c2326a03d2c9f92c92a30bbc7f3a9ee
   ReactiveSwift: bd4c122943593e67cb441409370c5c1e3cb32791
   Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
 
-PODFILE CHECKSUM: 97942aa66cb049b2abbc13c2837711713cb4a72f
+PODFILE CHECKSUM: 5c33b776dd7af5fae2a573576052dc3088fb7b01
 
 COCOAPODS: 1.5.3
